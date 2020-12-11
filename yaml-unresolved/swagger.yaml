@@ -6,8 +6,9 @@ info:
 tags:
   # 每个功能点一个tag
   - name: account
+    description: 账户，包含未学生认证的
   - name: user
-    description: user information
+    description: 用户，已学生认证
   - name: chat
     description: chatting
   - name: favorite
@@ -160,9 +161,39 @@ paths:
           description: Invalid userid supplied
         '404':
           description: User not found
+
+##################### Components ###############################
+##############  以下是数据库表对应的model   ####################
 components:
   schemas:
-    # 以下是数据库表对应的model
+    ###### Account ######
+    Account:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          example: 0
+        openId:
+          type: string
+          example: "open id from wx"
+        authenticated:
+          type: boolean
+          default: 0
+        nickName:
+          type: string
+          example: "nick name"
+        createTime:
+          type: string
+          format: date
+          example: "2020-12-12 00:00:00"
+        lastVisitTime:
+          type: string
+          format: date
+          example: "2020-12-12 00:00:00"
+      xml:
+        name: Account
+    
+    ###### Chat ######
     Chat:
       type: object
       properties:
@@ -180,13 +211,38 @@ components:
           example: hi！
       xml:
         name: Chat
+        
+    ###### User ######
     User:
       type: object
       properties:
         user_id:
           type: integer
           format: int64
-      description: User
+          example: 0
+        nickName:
+          type: string
+          example: "nick name"
+        realName:
+          type: string
+          example: "real name"
+        campus:
+          type: integer
+          description: 校区, 0-未定义，1-四平，2-嘉定，3-沪西，4-沪北
+          default: 0
+        college:
+          type: string
+          default: ""
+        major:
+          type: string
+          default: ""
+        grade:
+          type: integer
+          default: 0
+      xml:
+        name: User
+      
+    ###### Favorite ######
     Favorite:
       type: object
       properties:
@@ -199,9 +255,9 @@ components:
         good_id:
           type: integer
           example: 234
-      description: favorite goods of users
+          description: favorite goods of users
     
-    # 以下是自定义schema
+    ###### Contacts ######
     Contacts:
       type: object
       properties:
@@ -210,6 +266,7 @@ components:
           items:
             $ref: '#/components/schemas/User'
       description: All contacts of a user
+    ###### Messages ######
     Messages:
       type: object
       properties:
@@ -222,6 +279,7 @@ components:
           items:
             $ref: '#/components/schemas/Chat'
       description: All messages between two users
+    ###### Favorite List ######
     FavoriteList:
       type: object
       properties:
@@ -230,6 +288,7 @@ components:
           items:
             $ref: '#/components/schemas/Favorite'
       description: All favorites of a user
+    ###### New Favorite ######
     NewFavorite:
       type: object
       properties:
