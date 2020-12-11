@@ -161,7 +161,55 @@ paths:
           description: Invalid userid supplied
         '404':
           description: User not found
-          
+  '/search/GetRecommend/{userId}':
+    get:
+      tags:
+        - search
+      summary: get first page recommend for a user
+      operationId: getRecommendById
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodList'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GoodList'
+        '400':
+          description: Invalid userid supplied
+        '404':
+          description: User not found
+  '/search':
+    post: # 有点不符合RESTful，不过为了方便就这样吧
+      tags:
+        - search
+      summary: search goods by name, tags and price
+      operationId: searchGoods
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodList'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GoodList'
+        '400':
+          description: Invalid string supplied
+        '404':
+          description: not found
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
   ############################ User ###############################
   /user:
     post:
@@ -181,9 +229,9 @@ paths:
   ########################## User End #############################
 
 ##################### Components ###############################
-##############  以下是数据库表对应的model   ####################
 components:
   schemas:
+  ##############  以下是数据库表对应的model   ####################
     ###### Account ######
     Account:
       type: object
@@ -274,7 +322,16 @@ components:
           type: integer
           example: 234
           description: favorite goods of users
-    
+          
+    ###### Good 没写完######
+    Good:
+      type: object
+      properties:
+        good_id: 
+          type: integer
+      description: Good
+      
+    ##############  以下是自定义的schema   ####################
     ###### Contacts ######
     Contacts:
       type: object
@@ -284,6 +341,7 @@ components:
           items:
             $ref: '#/components/schemas/User'
       description: All contacts of a user
+      
     ###### Messages ######
     Messages:
       type: object
@@ -297,6 +355,7 @@ components:
           items:
             $ref: '#/components/schemas/Chat'
       description: All messages between two users
+      
     ###### Favorite List ######
     FavoriteList:
       type: object
@@ -306,6 +365,7 @@ components:
           items:
             $ref: '#/components/schemas/Favorite'
       description: All favorites of a user
+      
     ###### New Favorite ######
     NewFavorite:
       type: object
@@ -314,6 +374,47 @@ components:
           type: integer
         good_id:
           type: integer
+    
+    ###### Recommend List ######
+    GoodList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Good'
+      description: a list of goods searched for a user
+    ###### Recommend List ######
+    SearchCondition:
+      type: object
+      properties:
+        goodName:
+          type: string
+          example: JavaEE Learning Book
+        tags:
+          type: string
+          description: a string splited by `, no tags should be null
+          example: new`onsale`freshman
+        highestPrice:
+          type: number
+          example: 20.00
+          description: if no, null
+        lowestPrice:
+          type: number
+          example: 100.00
+          description: if no, null
+      description: a list of goods searched for a user
+  requestBodies:
+    Search:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SearchCondition'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/SearchCondition'
+      description: a searching
+      required: true
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
