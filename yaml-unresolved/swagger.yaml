@@ -161,6 +161,24 @@ paths:
           description: Invalid userid supplied
         '404':
           description: User not found
+          
+  ############################ User ###############################
+  /user:
+    post:
+      tags:
+        - user
+      description: all users of the platform
+      operationId: getUser
+      responses:
+        '200':
+          description: success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          
+  ########################## User End #############################
 
 ##################### Components ###############################
 ##############  以下是数据库表对应的model   ####################
@@ -232,10 +250,10 @@ components:
           default: 0
         college:
           type: string
-          default: ""
+          default: "sse"
         major:
           type: string
-          default: ""
+          default: "software engineering"
         grade:
           type: integer
           default: 0
