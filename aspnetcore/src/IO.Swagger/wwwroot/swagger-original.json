@@ -10,6 +10,8 @@
     "description" : "SwaggerHub API Auto Mocking"
   } ],
   "tags" : [ {
+    "name" : "account"
+  }, {
     "name" : "user",
     "description" : "user information"
   }, {
