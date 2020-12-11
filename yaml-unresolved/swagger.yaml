@@ -51,10 +51,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/requestBodies/Contacts'
+                $ref: '#/components/schemas/Contacts'
             application/xml:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Contacts'
         '400':
           description: Invalid userid supplied
         '404':
@@ -84,10 +84,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/requestBodies/Contacts'
+                $ref: '#/components/schemas/Messages'
             application/xml:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Messages'
         '400':
           description: Invalid userid supplied
         '404':
@@ -118,25 +118,26 @@ components:
           type: integer
           format: int64
       description: User
-  requestBodies:
     Contacts:
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/User'
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
       description: All contacts of a user
-      required: true
-    Messages2Users:
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Chat'
+    Messages:
+      type: object
+      properties:
+        sendedMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chat'
+        receivedMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chat'
       description: All messages between two users
-      required: true
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
