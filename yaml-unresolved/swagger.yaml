@@ -356,7 +356,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuestionPost'
+              $ref: '#/components/schemas/AskForGoodsPost'
         description: a new afg_post
         required: true
    
@@ -379,14 +379,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuestionPost'
+                $ref: '#/components/schemas/AskForGoodsPost'
             application/xml:
               schema:
-                $ref: '#/components/schemas/QuestionPost'
+                $ref: '#/components/schemas/AskForGoodsPost'
         '400':
           description: Invalid userid supplied
         '404':
           description: User not found
+          
   '/afg_post/remove/{userId}/{AFGPostId}':
     delete:
       tags:
@@ -426,7 +427,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuestionPost'
+              $ref: '#/components/schemas/RecommendGoodsPost'
         description: a new afg_post
         required: true
 
@@ -449,10 +450,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuestionPost'
+                $ref: '#/components/schemas/RecommendGoodsPost'
             application/xml:
               schema:
-                $ref: '#/components/schemas/QuestionPost'
+                $ref: '#/components/schemas/RecommendGoodsPost'
         '400':
           description: Invalid userid supplied
         '404':
@@ -684,6 +685,67 @@ components:
           example: hi！
       xml:
         name: QuestionPost 
+        
+    ###### RecommendGoodsPost######
+    RecommendGoodsPost:
+      type: object
+      properties:
+        rg_post_id:
+          type: integer
+          example: 10
+        user_id:
+          example: 13
+          type: integer
+        time:
+          type: string
+          format: date-time
+          example: "2020-12-12 00:00:00"
+        rg_intro:
+          type: string
+          example: hi！
+        rg_title:
+          type: string
+          example: hi！
+        rg_tag:
+          type: string
+          example: hi！
+      xml:
+        name: RecommendGoodsPost 
+        
+    ###### AskForGoodsPost######
+    AskForGoodsPost:
+      type: object
+      properties:
+        afg_post_id:
+          type: integer
+          example: 10
+        user_id:
+          example: 13
+          type: integer
+        time:
+          type: string
+          format: date-time
+          example: "2020-12-12 00:00:00"
+        afg_intro:
+          type: string
+          example: hi！
+        afg_title:
+          type: string
+          example: hi！
+        afg_tag:
+          type: string
+          example: hi！
+        afg_condition:
+          type: string
+          example: hi！
+        campus:
+          example: 13
+          type: integer
+        afg_price:
+          example: 13.00
+          type: number
+      xml:
+        name: AskForGoodsPost
           
     ###### Good 没写完######
     Good:
