@@ -813,6 +813,27 @@ components:
             $ref: '#/components/schemas/Favorite'
       description: All favorites of a user
       
+    ###### AskForGoodsPost List ######
+    AskForGoodsPostList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/AskForGoodsPost'
+      description: All AskForGoodsPost of a user
+
+  ###### RecommendGoodsPost List ######
+    RecommendGoodsPostList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecommendGoodsPost'
+      description: All RecommendGoodsPost of a user
+
+  
     ###### New Favorite ######
     NewFavorite:
       type: object
