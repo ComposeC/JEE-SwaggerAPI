@@ -502,16 +502,16 @@ paths:
         description: a new postanswer
         required: true
    
-  '/postanswer/get/{userId}':
+  '/postanswer/get/{QPostId}':
     get:
       tags:
         - postanswer
       summary: get all postanswer of a user
       operationId: getPostanswerById
       parameters:
-        - name: userId
+        - name: QPostId
           in: path
-          description: user id
+          description: qpost id
           required: true
           schema:
             type: integer
