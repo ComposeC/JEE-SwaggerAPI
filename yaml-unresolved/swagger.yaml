@@ -272,6 +272,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserInfo'
+              
   '/q_post/add':
     post:
       tags:
@@ -341,7 +342,220 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Not found
-              
+  
+  '/afg_post/add':
+    post:
+      tags:
+        - afg_post
+      summary: add a new afg_post
+      operationId: addAFGPost
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionPost'
+        description: a new afg_post
+        required: true
+   
+  '/afg_post/get/{userId}':
+    get:
+      tags:
+        - afg_post
+      summary: get all afg_post of a user
+      operationId: getAFGPostById
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionPost'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/QuestionPost'
+        '400':
+          description: Invalid userid supplied
+        '404':
+          description: User not found
+  '/afg_post/remove/{userId}/{AFGPostId}':
+    delete:
+      tags:
+        - afg_post
+      summary: remove a afg_post
+      operationId: deleteAFGPost
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+        - name: AFGPostId
+          in: path
+          description: afg_post id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found            
+
+  '/rg_post/add':
+    post:
+      tags:
+        - rg_post
+      summary: add a new rg_post
+      operationId: addRGPost
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionPost'
+        description: a new afg_post
+        required: true
+
+  '/rg_post/get/{userId}':
+    get:
+      tags:
+        - rg_post
+      summary: get all rg_post of a user
+      operationId: getRGPostById
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionPost'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/QuestionPost'
+        '400':
+          description: Invalid userid supplied
+        '404':
+          description: User not found
+  '/rg_post/remove/{userId}/{RGPostId}':
+    delete:
+      tags:
+        - rg_post
+      summary: remove a rg_post
+      operationId: deleteRGPost
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+        - name: RGPostId
+          in: path
+          description: rg_post id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found   
+          
+
+  '/postanswer/add':
+    post:
+      tags:
+        - postanswer
+      summary: add a new postanswer
+      operationId: addPostanswer
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionPost'
+        description: a new postanswer
+        required: true
+   
+  '/postanswer/get/{userId}':
+    get:
+      tags:
+        - postanswer
+      summary: get all postanswer of a user
+      operationId: getPostanswerById
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionPost'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/QuestionPost'
+        '400':
+          description: Invalid userid supplied
+        '404':
+          description: User not found
+          
+  '/postanswer/remove/{userId}/{PostanswerId}':
+    delete:
+      tags:
+        - postanswer
+      summary: remove a postanswer
+      operationId: deletePostanswer
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+        - name: PostanswerId
+          in: path
+          description: postanswer id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found            
+
+  
 
 ##################### Components ###############################
 components:
