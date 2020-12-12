@@ -63,7 +63,7 @@ paths:
                 $ref: '#/components/schemas/FavoriteList'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Contacts'
+                $ref: '#/components/schemas/FavoriteList'
         '400':
           description: Invalid userid supplied
         '404':
