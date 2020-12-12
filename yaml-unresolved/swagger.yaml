@@ -15,7 +15,7 @@ tags:
     description: user's favorite
   - name: search
     description: search for goods
-  - name: Qpost
+  - name: q_post
     description: user’s posts
   - name: postanswer
     description: user’s postanswers
@@ -269,11 +269,11 @@ paths:
             schema:
               $ref: '#/components/schemas/UserInfo'
    
-  '/Qpost/get/{userId}':
+  '/q_post/get/{userId}':
     get:
       tags:
-        - Qpost
-      summary: get all Qpost of a user
+        - q_post
+      summary: get all q_post of a user
       operationId: getQPostById
       parameters:
         - name: userId
@@ -291,16 +291,16 @@ paths:
                 $ref: '#/components/schemas/QuestionPost'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Contacts'
+                $ref: '#/components/schemas/QuestionPost'
         '400':
           description: Invalid userid supplied
         '404':
           description: User not found
-  '/Qpost/remove/{userId}/{QpostId}':
+  '/q_post/remove/{userId}/{QPostId}':
     delete:
       tags:
-        - favorite
-      summary: remove a Qpost
+        - q_post
+      summary: remove a q_post
       operationId: deleteQPost
       parameters:
         - name: userId
@@ -309,7 +309,7 @@ paths:
           required: true
           schema:
             type: integer
-        - name: QpostId
+        - name: QPostId
           in: path
           description: Qpost id
           required: true
