@@ -15,6 +15,10 @@ tags:
     description: user's favorite
   - name: search
     description: search for goods
+  - name: Qpost
+    description: user’s posts
+- name: postanswer
+    description: user’s postanswers
     
 paths:
   '/favorite/add':
@@ -211,7 +215,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Search'
 
- 	  
+     
   '/user/add':
     post:
       tags:
@@ -264,6 +268,74 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserInfo'
+    '/Qpost/add':
+    post:
+      tags:
+        - Qpost
+      summary: add a new Qpost
+      operationId: addQPost
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewQPost'
+        description: a new Qpost
+        required: true
+  '/Qpost/get/{userId}':
+    get:
+      tags:
+        - Qpost
+      summary: get all Qpost of a user
+      operationId: getQPostById
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QpostList'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contacts'
+        '400':
+          description: Invalid userid supplied
+        '404':
+          description: User not found
+  '/Qpost/remove/{userId}/{QpostId}':
+    delete:
+      tags:
+        - favorite
+      summary: remove a Qpost
+      operationId: deleteQPost
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+        - name: QpostId
+          in: path
+          description: Qpost id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
               
 
 ##################### Components ###############################
