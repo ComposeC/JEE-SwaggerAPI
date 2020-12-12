@@ -16,7 +16,11 @@ tags:
   - name: search
     description: search for goods
   - name: q_post
-    description: user’s posts
+    description: user’s q_posts
+  - name: afg_post
+    description: user’s afg_posts
+  - name: rg_post
+    description: user’s rg_posts
   - name: postanswer
     description: user’s postanswers
     
@@ -268,6 +272,22 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserInfo'
+  '/q_post/add':
+    post:
+      tags:
+        - q_post
+      summary: add a new q_post
+      operationId: addQPost
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionPost'
+        description: a new q_post
+        required: true
    
   '/q_post/get/{userId}':
     get:
