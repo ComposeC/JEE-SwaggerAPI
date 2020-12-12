@@ -833,7 +833,25 @@ components:
             $ref: '#/components/schemas/RecommendGoodsPost'
       description: All RecommendGoodsPost of a user
       
-   
+    ###### QuestionPost List ######
+    QuestionPostList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionPost'
+      description: All QuestionPost of a user
+    
+    ###### QuestionPostReply List ######
+    QuestionPostReplyList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionPostReply'
+      description: All QuestionPostReply of a user
 
   
     ###### New Favorite ######
