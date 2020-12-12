@@ -210,13 +210,14 @@ paths:
           description: not found
       requestBody:
         $ref: '#/components/requestBodies/Search'
-  ############################ User ###############################
-  /user:
+
+ 	  
+  '/user/add':
     post:
       tags:
         - user
-      description: all users of the platform
-      operationId: getUser
+      summary: 学生认证后增加用户
+      operationId: addUser
       responses:
         '200':
           description: success
@@ -225,8 +226,45 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-          
-  ########################## User End #############################
+  
+  '/user/update':
+    post:
+      tags:
+        - user
+      summary: 修改用户个人信息
+      operationId: updateUser
+      responses:
+        '200':
+          description: success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+              
+  '/user/get':
+    post:
+      tags:
+        - user
+      summary: 获取用户个人信息
+      operationId: getUser
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid string supplied
+        '404':
+          description: not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInfo'
+              
 
 ##################### Components ###############################
 components:
@@ -308,6 +346,14 @@ components:
           default: 0
       xml:
         name: User
+    
+    ###### User Info ######
+    UserInfo:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 0
       
     ###### Favorite ######
     Favorite:
