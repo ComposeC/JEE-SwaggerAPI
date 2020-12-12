@@ -309,7 +309,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuestionPost'
+                $ref: '#/components/schemas/QuestionPostList'
             application/xml:
               schema:
                 $ref: '#/components/schemas/QuestionPost'
@@ -521,7 +521,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuestionPostReply'
+                $ref: '#/components/schemas/QuestionPostReplyList'
             application/xml:
               schema:
                 $ref: '#/components/schemas/QuestionPostReply'
