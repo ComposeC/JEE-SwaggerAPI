@@ -498,7 +498,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QuestionPost'
+              $ref: '#/components/schemas/QuestionPostReply'
         description: a new postanswer
         required: true
    
@@ -521,10 +521,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuestionPost'
+                $ref: '#/components/schemas/QuestionPostReply'
             application/xml:
               schema:
-                $ref: '#/components/schemas/QuestionPost'
+                $ref: '#/components/schemas/QuestionPostReply'
         '400':
           description: Invalid userid supplied
         '404':
@@ -746,6 +746,29 @@ components:
           type: number
       xml:
         name: AskForGoodsPost
+    
+    ###### QuestionPostReply######
+    QuestionPostReply:
+      type: object
+      properties:
+        q_reply_id:
+          type: integer
+          example: 10
+        user_id:
+          example: 13
+          type: integer
+        q_post_id:
+          type: integer
+          example: 10
+        time:
+          type: string
+          format: date-time
+          example: "2020-12-12 00:00:00"
+        content:
+          type: string
+          example: hi！
+      xml:
+        name: QuestionPostReply
           
     ###### Good 没写完######
     Good:
