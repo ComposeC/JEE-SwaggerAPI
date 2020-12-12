@@ -379,7 +379,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AskForGoodsPost'
+                $ref: '#/components/schemas/AskForGoodsPostList'
             application/xml:
               schema:
                 $ref: '#/components/schemas/AskForGoodsPost'
@@ -450,7 +450,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecommendGoodsPost'
+                $ref: '#/components/schemas/RecommendGoodsPostList'
             application/xml:
               schema:
                 $ref: '#/components/schemas/RecommendGoodsPost'
