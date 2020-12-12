@@ -268,22 +268,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserInfo'
-    '/Qpost/add':
-    post:
-      tags:
-        - Qpost
-      summary: add a new Qpost
-      operationId: addQPost
-      responses:
-        default:
-          description: successful operation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NewQPost'
-        description: a new Qpost
-        required: true
+   
   '/Qpost/get/{userId}':
     get:
       tags:
@@ -303,7 +288,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QpostList'
+                $ref: '#/components/schemas/QuestionPost'
             application/xml:
               schema:
                 $ref: '#/components/schemas/Contacts'
@@ -441,6 +426,30 @@ components:
           type: integer
           example: 234
           description: favorite goods of users
+          
+          
+    ###### QuestionPost ######
+    QuestionPost:
+      type: object
+      properties:
+        q_post_id:
+          type: integer
+          example: 10
+        user_id:
+          example: 13
+          type: integer
+        time:
+          type: string
+          format: date-time
+          example: "2020-12-12 00:00:00"
+        q_content:
+          type: string
+          example: hi！
+        q_title:
+          type: string
+          example: hi！
+      xml:
+        name: QuestionPost 
           
     ###### Good 没写完######
     Good:
