@@ -17,7 +17,7 @@ tags:
     description: search for goods
   - name: Qpost
     description: user’s posts
-- name: postanswer
+  - name: postanswer
     description: user’s postanswers
     
 paths:
