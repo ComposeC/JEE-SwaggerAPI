@@ -41,19 +41,19 @@ paths:
               $ref: '#/components/schemas/NewFavorite'
         description: a new favorite
         required: true
-  '/favorite/get/{userId}':
+  '/favorite/get':
     get:
       tags:
         - favorite
       summary: get all favorites of a user
       operationId: getFavoritesById
-      parameters:
-        - name: userId
-          in: path
-          description: user id
-          required: true
-          schema:
-            type: integer
+      # parameters:
+      #   - name: userId
+      #     in: path
+      #     description: user id
+      #     required: true
+      #     schema:
+      #       type: integer
       responses:
         '200':
           description: successful operation
@@ -68,19 +68,19 @@ paths:
           description: Invalid userid supplied
         '404':
           description: User not found
-  '/favorite/remove/{userId}/{goodId}':
+  '/favorite/remove/{goodId}':
     delete:
       tags:
         - favorite
       summary: remove a favorite
       operationId: deleteFavor
       parameters:
-        - name: userId
-          in: path
-          description: user id
-          required: true
-          schema:
-            type: integer
+        # - name: userId
+        #   in: path
+        #   description: user id
+        #   required: true
+        #   schema:
+        #     type: integer
         - name: goodId
           in: path
           description: good id
@@ -109,19 +109,19 @@ paths:
               $ref: '#/components/schemas/Chat'
         description: Created a new chatting message
         required: true
-  '/chat/getContacts/{userId}':
+  '/chat/getContacts':
     get:
       tags:
         - chat
       summary: get all contacts of a user
       operationId: getContactsById
-      parameters:
-        - name: userId
-          in: path
-          description: user id
-          required: true
-          schema:
-            type: integer
+      # parameters:
+      #   - name: userId
+      #     in: path
+      #     description: user id
+      #     required: true
+      #     schema:
+      #       type: integer
       responses:
         '200':
           description: successful operation
@@ -136,25 +136,25 @@ paths:
           description: Invalid userid supplied
         '404':
           description: User not found
-  '/chat/getMessages/{senderId}/{receiverId}':
+  '/chat/getMessages':
     get:
       tags:
         - chat
       summary: get all messages between two users
       operationId: getMessages
-      parameters:
-        - name: senderId
-          in: path
-          description: sender user id
-          required: true
-          schema:
-            type: integer
-        - name: receiverId
-          in: path
-          description: receiver user id
-          required: true
-          schema:
-            type: integer
+      # parameters:
+      #   - name: senderId
+      #     in: path
+      #     description: sender user id
+      #     required: true
+      #     schema:
+      #       type: integer
+      #   - name: receiverId
+      #     in: path
+      #     description: receiver user id
+      #     required: true
+      #     schema:
+      #       type: integer
       responses:
         '200':
           description: successful operation
@@ -169,19 +169,19 @@ paths:
           description: Invalid userid supplied
         '404':
           description: User not found
-  '/search/GetRecommend/{userId}':
+  '/search/GetRecommend':
     get:
       tags:
         - search
       summary: get first page recommend for a user
       operationId: getRecommendById
-      parameters:
-        - name: userId
-          in: path
-          description: user id
-          required: true
-          schema:
-            type: integer
+      # parameters:
+      #   - name: userId
+      #     in: path
+      #     description: user id
+      #     required: true
+      #     schema:
+      #       type: integer
       responses:
         '200':
           description: successful operation
@@ -555,6 +555,175 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Not found            
+  '/Good/remove/{userId}/{goodId}':
+    delete:
+      tags:
+        - Good
+      summary: remove a Good
+      operationId: deleteGood
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+        - name: goodId
+          in: path
+          description: good id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+  '/Good/revise/{userId}/{goodId}':
+    put:
+      tags:
+        - Good
+      summary: revise a Good's information
+      operationId: reviseGood
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+        - name: goodId
+          in: path
+          description: good id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: good
+          in: query
+          description: The good to create.
+          schema:
+            $ref: '#/components/schemas/Good'
+          required: true      
+      responses:
+        '200':
+          description: Good successfully revised
+        '400':
+          description: Goods couldn't have been revised.
+          
+  '/Good/add/{userId}':    
+    post:
+      tags:
+        - Good
+      summary: add a new Good
+      operationId: addGood
+      parameters:
+        - name: userId
+          in: path
+          description: userId
+          schema:
+            type: integer
+          required: true
+        - name: good
+          in: query
+          description: The good to create.
+          schema:
+            $ref: '#/components/schemas/Good'
+          required: true
+      responses:
+        '200':
+          description: Good successfully created
+        '400':
+          description: Goods couldn't have been created.
+          
+  '/Good/getList/{userId}/{pageId}/{pageSize}':
+    get:
+      tags:
+        - Good
+      summary: get goodlist for a user
+      operationId: getGoodList
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+        - name: pageId
+          in: path
+          description: page id
+          required: true
+          schema:
+            type: integer
+        - name: pageSize
+          in: path
+          description: the number of good per page
+          required: true
+          schema:
+            type: integer            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - practicalnum
+                  - page_id
+                  - goodlist
+                properties:
+                  practicalnum:
+                    type: integer
+                    default: 10
+                  page_id:
+                    type: integer
+                    default: 1                    
+                  goodlist:
+                    $ref: '#/components/schemas/GoodList'                   
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GoodList'
+        '400':
+          description: Invalid userid supplied
+        '404':
+          description: User not found
+
+  '/Good/getItem/{userId}/{goodId}':
+    get:
+      tags:
+        - Good
+      summary: get good's concrete info for a user
+      operationId: getGoodItem
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+        - name: goodId
+          in: path
+          description: good id
+          required: true
+          schema:
+            type: integer
+         
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Good'             
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Good'
+        '400':
+          description: Invalid userid supplied
+        '404':
+          description: User not found
 
   
 
@@ -770,13 +939,55 @@ components:
       xml:
         name: QuestionPostReply
           
-    ###### Good 没写完######
+    ###### Good ######
     Good:
       type: object
       properties:
         good_id: 
           type: integer
-      description: Good
+          format: int64
+          example: 0
+        name:
+          type: string
+          example: "good name"
+        status:
+          type: integer
+          description: 商品状态，0-正在售出，1-已出售
+          default: 0
+        price:
+          type: string
+          example: "23.5"
+        description:
+          type: string
+          example: "description"
+        campus:
+          type: integer
+          description: 校区，0-未定义，1-四平，2-嘉定，3-沪西，4-沪北
+          default: 0
+        old:
+          type: integer
+          description: 成色，x-x成新
+          default: 10
+        seller_id:
+          type: integer
+          example: "0000xxxx"
+        pic_addr:
+          type: string
+          description: 商品图片在前端服务器上的地址
+        publish_date:
+          type: string
+          format: date
+          example: "2020-12-12 00:00:00"
+        deposit:
+          type: string
+          description: 押金，随商品价格而变动
+          example: "23.5"
+        tag:
+          type: string
+          description: 以"str+str+str+……"的形式存储
+      xml:
+        name: Good
+
       
     ##############  以下是自定义的schema   ####################
     ###### Contacts ######
