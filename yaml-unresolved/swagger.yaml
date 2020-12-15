@@ -93,18 +93,11 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Not found
-  '/chat/addMessage/{receiverId}':
+  '/chat/addMessage':
     post:
       tags:
         - chat
-      summary: add a new chatting message
-      parameters: 
-        - name: receiverId
-          in: path
-          description: receiver user id
-          required: true
-          schema:
-            type: integer
+      summary: add a new chatting message which is sended by this user
       operationId: addMessage
       responses:
         default:
@@ -113,7 +106,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Chat'
+              $ref: '#/components/schemas/NewChat'
         description: Created a new chatting message
         required: true
   '/chat/getContacts':
@@ -122,6 +115,13 @@ paths:
         - chat
       summary: get all contacts of a user
       operationId: getContactsById
+      # parameters:
+      #   - name: userId
+      #     in: path
+      #     description: user id
+      #     required: true
+      #     schema:
+      #       type: integer
       responses:
         '200':
           description: successful operation
@@ -136,16 +136,16 @@ paths:
           description: Invalid userid supplied
         '404':
           description: User not found
-  '/chat/getMessages/{contactId}':
+  '/chat/getMessages/{anotherUserId}':
     get:
       tags:
         - chat
       summary: get all messages between two users
       operationId: getMessages
       parameters:
-        - name: contactId
+        - name: anotherUserId
           in: path
-          description: anothor user id
+          description: sender user id
           required: true
           schema:
             type: integer
@@ -998,11 +998,7 @@ components:
     Messages:
       type: object
       properties:
-        sendedMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Chat'
-        receivedMessages:
+        Messages:
           type: array
           items:
             $ref: '#/components/schemas/Chat'
@@ -1063,8 +1059,6 @@ components:
     NewFavorite:
       type: object
       properties:
-        user_id:
-          type: integer
         good_id:
           type: integer
     
@@ -1077,6 +1071,23 @@ components:
           items:
             $ref: '#/components/schemas/Good'
       description: a list of goods searched for a user
+        ###### Chat ######
+    NewChat:
+      type: object
+      properties:
+        receiver_id:
+          example: 13
+          type: integer
+        time:
+          type: string
+          format: date-time
+          example: "2020-12-12 00:00:00"
+        content:
+          type: string
+          example: hi！
+      xml:
+        name: Chat
+        
     ###### Recommend List ######
     SearchCondition:
       type: object
@@ -1108,6 +1119,7 @@ components:
             $ref: '#/components/schemas/SearchCondition'
       description: a searching
       required: true
+  
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
