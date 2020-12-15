@@ -93,11 +93,18 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Not found
-  '/chat/addMessage':
+  '/chat/addMessage/{receiverId}':
     post:
       tags:
         - chat
       summary: add a new chatting message
+      parameters: 
+        - name: receiverId
+          in: path
+          description: receiver user id
+          required: true
+          schema:
+            type: integer
       operationId: addMessage
       responses:
         default:
@@ -115,13 +122,6 @@ paths:
         - chat
       summary: get all contacts of a user
       operationId: getContactsById
-      # parameters:
-      #   - name: userId
-      #     in: path
-      #     description: user id
-      #     required: true
-      #     schema:
-      #       type: integer
       responses:
         '200':
           description: successful operation
@@ -136,25 +136,19 @@ paths:
           description: Invalid userid supplied
         '404':
           description: User not found
-  '/chat/getMessages':
+  '/chat/getMessages/{contactId}':
     get:
       tags:
         - chat
       summary: get all messages between two users
       operationId: getMessages
-      # parameters:
-      #   - name: senderId
-      #     in: path
-      #     description: sender user id
-      #     required: true
-      #     schema:
-      #       type: integer
-      #   - name: receiverId
-      #     in: path
-      #     description: receiver user id
-      #     required: true
-      #     schema:
-      #       type: integer
+      parameters:
+        - name: contactId
+          in: path
+          description: anothor user id
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: successful operation
