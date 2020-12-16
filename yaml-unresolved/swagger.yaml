@@ -245,7 +245,7 @@ paths:
               $ref: '#/components/schemas/User'
               
   '/user/get':
-    post:
+    get:
       tags:
         - user
       summary: 获取用户个人信息
@@ -261,11 +261,6 @@ paths:
           description: Invalid string supplied
         '404':
           description: not found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserInfo'
               
   '/q_post/add':
     post:
